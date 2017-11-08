@@ -1,0 +1,27 @@
+#---------------
+#BOUCLE 1 : jouer tant que le joueur souhaite faire une partie.
+while game == True:
+    labyrinth = Labyrinth() #initialiser le plateau de jeu.
+    labyrinth.create() #fonction pour créer la structure du labyrinth (murs, objets, etc.)
+    macGyver = Hero()
+    #BOUCLE 2 : jouer tant que MacGyver n'est pas arrivé à la dernière case.
+
+    while macGyver.position<numberOfSquares: 
+        play #fonction contenant les règles de déplacement
+    check_objects #fontion pour vérifier si tous les objets ont été ramassés
+#Dès qu'il y est arrivé, vérifier s'il a ramassé tous les objets.
+#---------------
+
+#Vérité du jeu : victoire if ID==dernière case and hero.objectsCounter==Object.objects_counter:
+#    afficher image de victoire
+#    fin de la boucle
+#sinon if ID==dernière case and hero.objectsCounter!=Object.objects_counter:
+
+
+
+
+#----------------
+#PyGame : représenter une case 'chemin' avec l'image correspondante, sauf s'il s'agit d'une case 'objet'.
+#if square in road:
+#    if square not in objects:
+#        picture = 1 #ACTUALISER POUR PYGAME

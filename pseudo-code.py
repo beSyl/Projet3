@@ -15,39 +15,57 @@
 #déplacement = largeur+1 (ou hauteur, ou -1 selon touche clavier)
 
 #Structure du labyrinthe et de ses cases.
-x=0 #hauteur.
-y=0 #largeur.
+x=0 #départ hauteur.
+y=0 #départ largeur.
+height=15
+width=15
+total_sprites=str(height*width)
 labyrinth=[] #liste des coordonnées des 225 cases du plateau de jeu.
 
+print("Le labyrinthe contient " + total_sprites + " cases.")
+
 i=0
-while i<225: #NB : faire correspondre au nombre d'éléments dans la
+while i<height*width: #NB : faire correspondre au nombre d'éléments dans la
     labyrinth.append([x, y]) #ajout d'un nouveau tuple de coordonnées dans la liste.
-    if y<14:
+    if y<width-1:
         y+=1
     else:
-        if x<14:
+        if x<height-1:
             x+=1
             y=0
     i+=1
 
 print(labyrinth)#Afficher le contenu de la liste labyrinth.
 
+#-----
+
+#Est-ce utile ??? .....
+list_ID=[]
+i=0
+while i<height*width:
+    ID=labyrinth[i][0]*15+labyrinth[i][1]
+    list_ID.append(ID)
+    i+=1
+print(list_ID)
+
+
 #importer le fichier labyrinth.txt en tant que file
 #Mettre le fichier txt "à plat" dans une liste, i.e. liste de 225 éléments plutôt qu'une référence hauteur/largeur
 list_labyrinth = []
 #ID = ligne*15+largeur #pour une case en ligne 2 colonne 7, [2, 7] : 2*15+7 = ID[37] #la ligne 0 est ainsi neutralisée pour ne conserver que la largeur comme ID.
 #intégrer les
-for line in file: #tant qu'il y a un élément dans le fichier:
-    for element in line: #l'élément est déterminé par hauteur/largeur
-        if element!="/n": #sauf s'il s'agit d'un saut de ligne
-            list_labyrinth.append([line, element]) #ajouter l'élément dans list_labyrinth
+with open('laby_test1.txt', 'r') as f:
+    file = f.read()
 
-
+for element in file: #tant qu'il y a un élément dans le fichier
+    if element!="\n": #sauf s'il s'agit d'un saut de ligne
+        list_labyrinth.append(element)
+print(list_labyrinth)
 #Créer une liste qui contiendra les ID 
 
+  
     
-    
-for element in Walls(): #lister toutes 
+#for element in Walls(): #lister toutes 
 
 #----------
 #CLASSES
@@ -58,17 +76,17 @@ for element in Walls(): #lister toutes
 #       self.macGyver = [0, 0, "image.jpg"] #NB : lier l'image associée 
 #       self.guardian = [self.HEIGHT_MAX, self.WIDTH_MAX, "image.jpg"] #NB : lier l'image associée #IMPORTANT: est-ce utile s'il y a un "e" dans labyrinth.txt ?
 
-def make_walls(): #fonction servant à créer les murs
-    walls = []
-    i=0
-    while i<HEIGHT_MAX.Labyrinth*WIDTH_MAX.Labyrinth:
-        if list_labyrinth[i]=="X": #si l'élément est un X, il est intégré à la liste de murs
-            labyrinth[i]= walls.append(i)
+#def make_walls(): #fonction servant à créer les murs
+#    walls = []
+#    i=0
+#    while i<HEIGHT_MAX.Labyrinth*WIDTH_MAX.Labyrinth:
+#        if list_labyrinth[i]=="X": #si l'élément est un X, il est intégré à la liste de murs
+#            labyrinth[i]= walls.append(i)
     #les X symbolisent les murs, la liste walls conserve leur ID qui correspond également à celui de la list labyrinth
     #VERIFIER si la suite de la condition est nécessaire : la fin du jeu est déterminée par la position du gardien...
-        elif list_labyrinth[i]=="e":
-            for x, y in list-labyrinth:
-                guardian = [x, y]
+#        elif list_labyrinth[i]=="e":
+#            for x, y in list-labyrinth:
+#                guardian = [x, y]
 
 
 
@@ -77,8 +95,8 @@ def make_walls(): #fonction servant à créer les murs
 #   pass
 
 
-guardian=Character()
-guardian(HEIGHT_MAX.labyrinth, WIDTH_MAX.labyrinth) #la position du gardien est évolutive et s'ajuste si labyrinth.txt change de dimensions.
+#guardian=Character()
+#guardian(HEIGHT_MAX.labyrinth, WIDTH_MAX.labyrinth) #la position du gardien est évolutive et s'ajuste si labyrinth.txt change de dimensions.
 
 #class Movement:
 #    def __init__(self):
@@ -90,7 +108,7 @@ guardian(HEIGHT_MAX.labyrinth, WIDTH_MAX.labyrinth) #la position du gardien est 
 #        self.width = width #coordonnée en largeur
 #        self.picture = picture #appeler l'image stocké dans un fichier
 #    def list(self):
-        self.list = []
+        #self.list = []
         
 #       
 
