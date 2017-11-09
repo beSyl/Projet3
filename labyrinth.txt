@@ -1,15 +1,15 @@
-s  XXXXX X  XXX
- X     X XX X  
-  XX X 1 X    X
+   XXXXX X  XXX
+X      X XX X  
+   XX X  X    X
 X   XXXX   XXXX
-   X     XXX  X
+ X       XXX  X
 XX XXXX XX   XX
    XXX    XXXXX
  X   XX X XX  X
- XX X 2 X   XXX
+ XX X   X   XXX
 XXX  XXXX XXXXX
 XXX XX X  XX  X
-X 3 X  X XX  XX
+X   X  X XX  XX
   XX  X     XXX
 XXXXX XX XX XXX
-X    XXX  X   e
+X    XXX  X    
