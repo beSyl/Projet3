@@ -108,7 +108,7 @@ while i<Object.objects_counter: #on crée autant de chiffres qu'il existe d'inst
 #VERIFICATION-----
 print("Cases 'chemin' : " + str(road))     
 print("Cases 'mur' : " + str(walls))
-print("Case 'fin' : " + str(end))
+print("Case 'fin' : " + str(road[-1]))
 
 print("Objet " + str(objects[0].name) + " en case " + str(objects[0].position))
 print("Objet " + str(objects[1].name) + " en case " + str(objects[1].position))

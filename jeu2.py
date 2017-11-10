@@ -1,11 +1,13 @@
 import random
 
 #VARIABLES-----
-walls=[]#uniquement les cases "murs"
-road=[]#uniquement les cases "chemin"
-list_labyrinth=[]#toutes les cases, numérotées de 0 à numberOfSquares-1.
-objects=[]#cases "objets" créées de manière aléatoire à partir de la liste 'road' (NB : ces cases sont à la fois dans les listes 'objects' et 'road')
+list_labyrinth = []#toutes les cases, numérotées de 0 à numberOfSquares-1.
+walls = []#uniquement les cases "murs"
+road = []#uniquement les cases "chemin"
+objects = []#cases "objets" créées de manière aléatoire à partir de la liste 'road' (NB : ces cases sont à la fois dans les listes 'objects' et 'road')
 end = []
+items = []
+
 
 #CLASSES-----
 #STRUCTURE DU LABYRINTHE.
@@ -40,7 +42,7 @@ class Hero:
 
     def move(self, direction):
         movement=0
-        
+
         if direction == "right":
             movement = 1
         elif direction == "left":
@@ -49,54 +51,56 @@ class Hero:
             movement = -Labyrinth.WIDTH
         elif direction == "down":
             movement = Labyrinth.WIDTH
-
-        if self.position in objects:
-            print("Un objet trouvé !")
-            self.objectsCounter+=1
-            a=self.position
-            objects.remove(a)
-                
+        
         #Si le déplacement envisagé conduit à une case "chemin" (ou une case "objet" figurant à la fois dans les listes 'road' et 'objects').
         #Implicitement, le déplacement est >=0 et <numberOfSquares).
-        if self.position+movement in road:
+        if self.position+movement in objects:
+            a=self.position+movement
+            items.append(a)
+            objects.remove(a)
             self.position+=movement
+        elif self.position+movement in road:
             #Si le déplacement conduit à une case "objet", le personnage le ramasse.
             #L'objet est supprimé de la list 'objects' MAIS sa case est toujours présente dans la liste 'road' dont elle est issue.
-
-        elif self.position == Labyrinth.numberOfSquares:
-            if self.objectsCounter == 3:
+            self.position+=movement
+        elif self.position+movement in end:
+            if len(items) == 3:
                 print("MacGyver a trouvé tous les objets : il a gagné.")
             else:
-                print("MacGyver n'a pas trouvé tous les objets : il a perdu.")
-        #Si le déplacement conduit à une case "mur" ou sort des limites du plateau de jeu (résultat négatif ou supérieur au numéro de la case de fin), aucun mouvement.
+                print("MacGyver a trouvé " + str(len(items)) + " objets : il a perdu.")
+            self.position+=movement
+
+          #Si le déplacement conduit à une case "mur" ou sort des limites du plateau de jeu (résultat négatif ou supérieur au numéro de la case de fin), aucun mouvement.
         else: 
             movement=0
         
-        print(self.position)
+        print("MacGyver a bougé : il est à la case " + str(self.position))
 
 
 #JEU-----
 labyrinth = Labyrinth() #initialiser le plateau de jeu.
 macGyver = Hero()
 
-#Créer une liste d'ID des murs à partir du fichier labyrinthe (i.e. leur emplacement dans la liste des cases)
-#Créer une liste d'ID des passages à partir du fichier labyrinthe.
+#while macGyver.position < Labyrinth.numberOfSquares:
+
+    #Créer une liste d'ID des murs à partir du fichier labyrinthe (i.e. leur emplacement dans la liste des cases)
+    #Créer une liste d'ID des passages à partir du fichier labyrinthe.
 i=0
 while i<Labyrinth.numberOfSquares:
-    if list_labyrinth[i] != "\n":
-        if list_labyrinth[i]=="X":
-            walls.append(i)
-        elif list_labyrinth[i]==" ":
-            road.append(i)
-        elif list_labyrinth[i] == "e":
-            end.append(i)
+    if list_labyrinth[i]=="X":
+        walls.append(i)
+    elif list_labyrinth[i]==" ":
+        road.append(i)
+    elif list_labyrinth[i] == "e":
+        end.append(i)
     i+=1
-#Créer les objets, en position '0' par défaut.
+
+    #Créer les objets, en position '0' par défaut.
 objects.append(Object("tube", 0))
 objects.append(Object("aiguille", 0))
 objects.append(Object("ether", 0))
 
-#Créer la position de chaque objet à ramasser, à partir de la liste 'road'.
+    #Créer la position de chaque objet à ramasser, à partir de la liste 'road'.
 i=0
 while i<Object.objects_counter: #on crée autant de chiffres qu'il existe d'instances de la classe Object.
     number=random.randint(1, Labyrinth.numberOfSquares-1) #on exclut la première et la dernière case, soit le départ et l'arrivée du jeu, pour positionner les objets à ramasser.
@@ -105,11 +109,12 @@ while i<Object.objects_counter: #on crée autant de chiffres qu'il existe d'inst
         i+=1
 
 
+
 #VERIFICATION-----
 print("Cases 'chemin' : " + str(road))     
 print("Cases 'mur' : " + str(walls))
 print("Case 'fin' : " + str(end))
-
+print("La liste 'objects' contient " + str(len(objects)) + " objets.")
 print("Objet " + str(objects[0].name) + " en case " + str(objects[0].position))
 print("Objet " + str(objects[1].name) + " en case " + str(objects[1].position))
 print("Objet " + str(objects[2].name) + " en case " + str(objects[2].position))
