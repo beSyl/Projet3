@@ -2,7 +2,7 @@ import random
 from constantes import *
 
 #FUNCTIONS
-def make_walls():
+def place_objects():
     i=0
     while i<3: #Créer autant de chiffres qu'il existe d'objets.
         number=random.randint(1, road[-1]) #Exclure la première et la dernière case, soit le départ et l'arrivée du jeu, pour positionner les objets à ramasser.

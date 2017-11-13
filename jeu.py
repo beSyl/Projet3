@@ -5,7 +5,7 @@ from fonctions import *
 #GAME-----
 labyrinth = Labyrinth() #Initialiser le plateau de jeu.
 macGyver = Hero() #Initialiser le héros.
-make_walls()
+place_objects()
 
 #Déterminer les objets à partir des positions créées de manière aléatoire dans 'objects'.
 tube = objects[0]
@@ -14,6 +14,7 @@ ether = objects[2]
 
 
 #VERIFICATION-----
+#Scénario de parcours.
 print("Cases 'chemin' : " + str(road))     
 print("Cases 'mur' : " + str(walls))
 print("Case 'fin' : " + str(road[-1]))
