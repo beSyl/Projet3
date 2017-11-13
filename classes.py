@@ -6,6 +6,7 @@ class Labyrinth:
     HEIGHT=15 #Hauteur en nombre de cases.
     WIDTH=15 #Largeur en nombre de cases.
     ALL_SQUARES = HEIGHT*WIDTH #Nombre de cases composant du labyrinthe.
+    GAME = 1 #Jeu valide (si GAME == 0, alors le jeu est terminé).
 
     def __init__(self):#Transformer le fichier labyrinthe en liste (i.e. une liste des cases du plateau de jeu).
         with open('labyrinth.txt', 'r') as f:
@@ -21,6 +22,8 @@ class Labyrinth:
                 elif list_labyrinth[i]==" ":
                     road.append(i)
             i+=1
+
+        play = 1
 
 
 #OBJECTS TO PICK UP.
@@ -54,26 +57,25 @@ class Hero:
             movement = -Labyrinth.WIDTH
         elif direction == "down":
             movement = Labyrinth.WIDTH
-
-        if self.position in objects:
-            print("Un objet trouvé en case " + str(self.position) + " !")
-            self.objectsCounter+=1
-            a=self.position
-            objects.remove(a)
                 
         if self.position+movement in road:
             self.position+=movement
-
-        if self.position == road[-1]:
-            if self.objectsCounter == 3:
-                print("MacGyver a trouvé tous les objets : il a GAGNÉ !")
-            else:
-                print("MacGyver n'a trouvé que " + str(self.objectsCounter) + " objet(s) : il a PERDU...")
+            if self.position in objects:
+                print("Un objet trouvé en case " + str(self.position) + " !")
+                self.objectsCounter+=1
+                a=self.position
+                objects.remove(a)
+            elif self.position == road[-1]:
+                if self.objectsCounter == 3:
+                    print("MacGyver a trouvé tous les objets : il a GAGNÉ !")
+                    Labyrinth.GAME = 0 #fin de partie
+                else:
+                    print("MacGyver n'a trouvé que " + str(self.objectsCounter) + " objet(s) : il a PERDU...")
+                    Labyrinth.GAME = 0 #fin de partie
         else: 
             movement=0
 
         self.line = self.position//Labyrinth.WIDTH
-
         self.column = self.position-(self.line*Labyrinth.WIDTH)
         print("MacGyver en case n° " + str(self.position) + ". En ligne " + str(self.line) + ", colonne " + str(self.column))
 
