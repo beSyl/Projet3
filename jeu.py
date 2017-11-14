@@ -1,16 +1,22 @@
+"""
+Le fichier 'jeu' contient les éléments nécessaires au démarrage du jeu et à la réalisation d'une partie.
+"""
+
 from classes import *
 from fonctions import *
 
 
 #GAME-----
-play = 1 #Le joueur souhaite jouer si play == 1, sinon il souhaite s'arrêter.
-while play == 1:
+play = 1 #Jeu, i.e. 1re boucle 'while'.
+while play: #Le joueur souhaite jouer si play == 1, sinon il souhaite s'arrêter.
     #Vider les listes 'road', 'walls' et 'objects'.
     del(road[:])
     del(walls[:])
     del(objects[:])
-    Labyrinth.GAME = 1 #début de partie
-    while Labyrinth.GAME == 1: #La partie commence si Labyrinth.GAME == 1, sinon elle se termine.
+
+    game = 1 #Partie de jeu, i.e. 2e boucle 'while'.
+    
+    while game: #La partie commence si game == 1, sinon elle se termine.
         labyrinth = Labyrinth() #Initialiser le plateau de jeu.
         macGyver = Hero() #Initialiser le héros.
         place_objects() #Créer de manière aléatoire la position des objets.
@@ -78,6 +84,8 @@ while play == 1:
             print("L'ether n'a pas été ramassée.")
         else:
             print("L'ether a été ramassé : bravo !")
+
+        game=0 #fin de partie
 
     choice = input("q pour quitter, autre touche pour jouer une nouvelle partie : ")
     if choice == "q":
