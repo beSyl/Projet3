@@ -6,3 +6,10 @@ objects=[]#Cases "objets" créées de manière aléatoire à partir de la liste 
 
 
 #IMAGES-----
+background_picture = "images/background_600x600.png"
+wall_picture = "images/wall_40x40.png"
+hero_picture = "images/macGyver.png"
+guardian_picture = "images/guardian.png"
+ether_picture = "images/ether_40x40.png"
+needle_picture = "images/needle_40x40.png"
+tube_picture = "images/tube_40x40.png"
