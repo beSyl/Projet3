@@ -1,94 +1,73 @@
+"""'Aidez MacGyver à s'échapper !'
+OpenClassrooms parcours DA Python - Projet 3
+https://openclassrooms.com/projects/aidez-macgyver-a-sechapper
 """
-Le fichier 'jeu' contient les éléments nécessaires au démarrage du jeu et à la réalisation d'une partie.
-"""
 
-from classes import *
-from fonctions import *
+import pygame
+from pygame.locals import *
 
+from Labyrinth import *
+from Hero import *
+from constantes import *
 
-#GAME-----
-play = 1 #Jeu, i.e. 1re boucle 'while'.
-while play: #Le joueur souhaite jouer si play == 1, sinon il souhaite s'arrêter.
-    #Vider les listes 'road', 'walls' et 'objects'.
-    del(road[:])
-    del(walls[:])
-    del(objects[:])
+pygame.init()
 
-    game = 1 #Partie de jeu, i.e. 2e boucle 'while'.
-    
-    while game: #La partie commence si game == 1, sinon elle se termine.
-        labyrinth = Labyrinth() #Initialiser le plateau de jeu.
-        macGyver = Hero() #Initialiser le héros.
-        place_objects() #Créer de manière aléatoire la position des objets.
+#Ouverture de la fenêtre Pygame (carré : largeur = hauteur)
+window = pygame.display.set_mode((window_size, window_size))
 
-        #Déterminer les objets à partir des positions créées de manière aléatoire dans 'objects'.
-        tube = objects[0]
-        needle = objects[1]
-        ether = objects[2]
+#Poursuite du mouvement si la touche de direction est maintenue enfoncée 50 ms (1er argument), puis répété tous les 80 ms (2e argument).
+pygame.key.set_repeat(50, 80)
 
+#BOUCLE PRINCIPALE
+play = 1
 
-        #VERIFICATION-----
-        #Scénario d'événements au clavier.
-        print("Cases 'chemin' : " + str(road))     
-        print("Cases 'mur' : " + str(walls))
-        print("Case 'fin' : " + str(road[-1]))
-        print("Objets ajoutés à la liste 'objects' : " + str(len(objects)))
-        print("Le tube est placé en case " + str(tube))
-        print("L'aiguille est placée en case " + str(needle))
-        print("L'ether est placée en case " + str(ether) + "\n")
+while play == 1:	
 
-        macGyver.move("left")
-        macGyver.move("right")
-        macGyver.move("right")
-        macGyver.move("right")
-        macGyver.move("up")
-        macGyver.move("down")
-        macGyver.move("down")
-        macGyver.move("right")
-        macGyver.move("down")
-        macGyver.move("down")
-        macGyver.move("right")
-        macGyver.move("right")
-        macGyver.move("right")
-        macGyver.move("right")
-        macGyver.move("right")
-        macGyver.move("down")
-        macGyver.move("down")
-        macGyver.move("right")
-        macGyver.move("right")
-        macGyver.move("down")
-        macGyver.move("down")
-        macGyver.move("down")
-        macGyver.move("down")
-        macGyver.move("left")
-        macGyver.move("down")
-        macGyver.move("down")
-        macGyver.move("right")
-        macGyver.move("right")
-        macGyver.move("right")
-        macGyver.move("down")
-        macGyver.move("down")
-        macGyver.move("right")
-        macGyver.move("right")
-        macGyver.move("right")
-        print("\nAprès avoir retiré les objets trouvés, la liste 'objects' ne contient plus que " + str(len(objects)) + " objets à la fin du jeu.")
-        if tube in objects:
-            print("Le tube n'a pas été ramassé.")
-        else:
-            print("Le tube a été ramassé : bravo !")
-        if needle in objects:
-            print("L'aiguille n'a pas été ramassée.")
-        else:
-            print("L'aiguille a été ramassée : bravo !")
-        if ether in objects:
-            print("L'ether n'a pas été ramassée.")
-        else:
-            print("L'ether a été ramassé : bravo !")
+	#Génération d'un labyrinth à partir d'un fichier
+	labyrinth = Labyrinth()
+	labyrinth.create()
+	labyrinth.place_objects()
+	labyrinth.show(window)
 
-        game=0 #fin de partie
+	#Création de MacGyver
+	macGyver = Hero("images/macGyver.png", labyrinth)
+	game = 1
+				
+	#BOUCLE DE JEU
+	while game:
+		#Chargement et affichage de l'écran d'accueil
+		background = pygame.image.load(picture_background).convert()
+		window.blit(background, (0,0))
 
-    choice = input("q pour quitter, autre touche pour jouer une nouvelle partie : ")
-    if choice == "q":
-        play = 0
-    elif choice == "o":
-        play = 1
+		#Limitation de vitesse de la boucle
+		pygame.time.Clock().tick(20)
+	
+                #Déplacement clavier.
+		macGyver.run_pygame()			
+			
+		#Affichages aux nouvelles positions
+		window.blit(background, (0,0))
+		labyrinth.show(window)
+		window.blit(macGyver.direction, (macGyver.x, macGyver.y)) #macGyver.direction = l'image dans la bonne direction
+		pygame.display.flip()
+
+		#Ramasser un objet
+		if labyrinth.structure[macGyver.case_y][macGyver.case_x] == 'E' or labyrinth.structure[macGyver.case_y][macGyver.case_x] == 'N' or labyrinth.structure[macGyver.case_y][macGyver.case_x] == 'T':
+			macGyver.panier += 1
+			labyrinth.structure[macGyver.case_y][macGyver.case_x] = ' '
+			if __name__ == "__main__":
+				print("Objet(s) dans le panier : " + str(macGyver.panier))
+				print(str(labyrinth.structure))
+
+		#Victoire
+		if labyrinth.structure[macGyver.case_y][macGyver.case_x] == 'e':
+			macGyver.check_victory()
+			if macGyver.victory == True:
+				picture = pygame.image.load(picture_victory).convert()            
+			elif macGyver.victory == False:
+				picture = pygame.image.load(picture_defeat).convert()
+
+			window.blit(picture, (0,0))
+			pygame.display.flip()
+			play = 0
+			game = 0

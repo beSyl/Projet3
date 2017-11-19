@@ -1,15 +1,17 @@
-#VARIABLES-----
-list_labyrinth=[]#Toutes les cases, numérotées de 0 à ALL_SQUARES-1.
-walls=[]
-road=[]
-objects=[]#Cases "objets" créées de manière aléatoire à partir de la liste 'road' (NB : ces cases sont à la fois dans les listes 'objects' et 'road')
+"""Constantes du jeu 'Aidez MacGyver à s'échapper !'
+"""
 
+#Dimensions de la fenêtre Pygame
+squares_per_side = 15
+sprite_dimension = 40
+window_size = squares_per_side * sprite_dimension
 
-#IMAGES-----
-background_picture = "images/background_600x600.png"
-wall_picture = "images/wall_40x40.png"
-hero_picture = "images/macGyver.png"
-guardian_picture = "images/guardian.png"
-ether_picture = "images/ether_40x40.png"
-needle_picture = "images/needle_40x40.png"
-tube_picture = "images/tube_40x40.png"
+#Images du jeu
+picture_victory = "images/victory.png"
+picture_defeat = "images/defeat.png"
+picture_background = "images/background.png"
+picture_wall = "images/wall.png"
+picture_guardian = "images/guardian.png"
+picture_ether = "images/ether.png"
+picture_needle = "images/needle.png"
+picture_tube = "images/tube.png"
