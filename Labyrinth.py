@@ -23,15 +23,15 @@ class Labyrinth:
             list_structure = []
             #On parcourt les lignes du fichier
             for line in file:
-                line_niveau = []
-                #On parcourt les sprites (lettres) contenus dans le fichier
+                list_line = []
+                #On parcourt les lettres contenus dans le fichier, symbolisant les cases
                 for sprite in line:
-                    #On ignore les "\n" de fin de ligne
+                    #On ignore les sauts de ligne
                     if sprite != '\n':
-                        #On ajoute le sprite à la liste de la ligne
-                        line_niveau.append(sprite)
-                #On ajoute la ligne à la liste du niveau
-                list_structure.append(line_niveau)
+                        #On ajoute chaque lettre à la liste de la ligne
+                        list_line.append(sprite)
+                #On ajoute la ligne à la liste générale
+                list_structure.append(list_line)
             #On sauvegarde cette structure
             self.structure = list_structure
 
