@@ -8,35 +8,37 @@ from pygame.locals import *
 from constantes import *
 
 class Labyrinth:
-    """Classe permettant de créer un niveau"""
+    """Classe permettant de créer un labyrinthe de jeu."""
     def __init__(self):
         self.fichier = 'labyrinth.txt'
         self.structure = 0
     
     
     def create(self):
-        """Méthode permettant de générer le niveau en fonction du fichier.
-        On crée une liste générale, contenant une liste par ligne à afficher""" 
+        """Méthode de classe Labyrinth.
+        Générer le labyrinthe à partir du fichier txt.
+        On crée une liste, contenant une liste par ligne à afficher.""" 
         #On ouvre le fichier
         with open(self.fichier, "r") as file:
-            structure_niveau = []
+            list_structure = []
             #On parcourt les lignes du fichier
-            for ligne in file:
-                ligne_niveau = []
+            for line in file:
+                line_niveau = []
                 #On parcourt les sprites (lettres) contenus dans le fichier
-                for sprite in ligne:
+                for sprite in line:
                     #On ignore les "\n" de fin de ligne
                     if sprite != '\n':
                         #On ajoute le sprite à la liste de la ligne
-                        ligne_niveau.append(sprite)
+                        line_niveau.append(sprite)
                 #On ajoute la ligne à la liste du niveau
-                structure_niveau.append(ligne_niveau)
+                list_structure.append(line_niveau)
             #On sauvegarde cette structure
-            self.structure = structure_niveau
+            self.structure = list_structure
+
 
     def place_objects(self):
-        """Méthode permettant de générer le niveau en fonction du fichier.
-        On crée une liste générale, contenant une liste par ligne à afficher""" 
+        """Méthode de classe Labyrinth.
+        Placer les objets dans le labyrinthe, en modifiant la liste de structure du labyrinthe ('self.structure').""" 
         #On ouvre le fichier
         i = 0
         while i < 3:
@@ -50,30 +52,30 @@ class Labyrinth:
                         if i == 2:
                                 self.structure[number1][number2] = "T" #tube
                         i+=1
+
         print(str(self.structure))
 
-    
                 
     def show(self, window):
-        """Méthode permettant d'afficher le niveau en fonction 
-        de la liste de structure renvoyée par create()"""
-        #Chargement des images (seule celle d'arrivée contient de la transparence)
+        """Méthode de classe Labyrinth.
+        Afficher le plateau de jeu en fonction de la liste de structure du labyrinthe ('self.structure')."""
+        #Chargement des images
         guardian = pygame.image.load(picture_guardian).convert_alpha()
         wall = pygame.image.load(picture_wall).convert()
         ether = pygame.image.load(picture_ether).convert_alpha()
         needle = pygame.image.load(picture_needle).convert_alpha()
         tube = pygame.image.load(picture_tube).convert_alpha()
 
-        
-        #On parcourt la liste du niveau
-        num_ligne = 0
-        for ligne in self.structure:
+        #Déterminer la position dans la fenêtre Pygame selon la position abscisse/ordonnée.
+        #Utiliser la dimension d'un sprite (case dans Pygame).
+        num_line = 0
+        for line in self.structure:
             #On parcourt les listes de lignes
-            num_case = 0
-            for sprite in ligne:
+            num_square = 0
+            for sprite in line:
                 #On calcule la position réelle en pixels
-                x = num_case * sprite_dimension
-                y = num_ligne * sprite_dimension
+                x = num_square * sprite_dimension
+                y = num_line * sprite_dimension
                 if sprite == 'X':          #m = Mur
                     window.blit(wall, (x,y))
                 elif sprite == 'E':        #E = Ether
@@ -86,5 +88,5 @@ class Labyrinth:
                     window.blit(guardian, (x,y))
                 elif sprite == 'L':        #L = Lose
                     window.blit(lose, (x,y))
-                num_case += 1
-            num_ligne += 1
+                num_square += 1
+            num_line += 1

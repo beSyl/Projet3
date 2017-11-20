@@ -48,15 +48,15 @@ while play == 1:
 		#Affichages aux nouvelles positions
 		window.blit(background, (0,0))
 		labyrinth.show(window)
-		window.blit(macGyver.direction, (macGyver.x, macGyver.y)) #macGyver.direction = l'image dans la bonne direction
+		window.blit(macGyver.picture, (macGyver.x, macGyver.y)) #Avatar de MacGyver sur le plateau de jeu.
 		pygame.display.flip()
 
 		#Ramasser un objet
 		if labyrinth.structure[macGyver.case_y][macGyver.case_x] == 'E' or labyrinth.structure[macGyver.case_y][macGyver.case_x] == 'N' or labyrinth.structure[macGyver.case_y][macGyver.case_x] == 'T':
-			macGyver.panier += 1
+			macGyver.cart += 1
 			labyrinth.structure[macGyver.case_y][macGyver.case_x] = ' '
 			if __name__ == "__main__":
-				print("Objet(s) dans le panier : " + str(macGyver.panier))
+				print("Objet(s) dans le panier : " + str(macGyver.cart))
 				print(str(labyrinth.structure))
 
 		#Victoire
