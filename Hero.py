@@ -18,7 +18,7 @@ class Hero:
         self.case_y = 0
         self.x = 0
         self.y = 0
-        #Plateau de jeu dans lequel le personnage se trouve 
+        #Plateau de jeu dans lequel le personnage évolue. 
         self.game = game
         #Panier dans lequel stocker les objets ramassés.
         self.cart = 0
