@@ -1,6 +1,8 @@
 #Virtual environment
-./envProject3
-*.cfg
+envProject3/
+
+Pycharm
+.idea/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
