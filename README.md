@@ -1,4 +1,32 @@
-﻿"Aidez MacGyver à s'échapper !"
+﻿EN
+"Help MacGyver to escape!"
+OpenClassrooms DA Python Course - Project 3
+-----
+
+The file 'jeu.py' corresponds to the program whose modules are 'contantes.py', 'Labyrinth.py' (class), 'Hero.py' (class).
+The file 'labyrinth.txt' represents the structure of the game using lines of characters.
+The 'images' directory
+
+The maze is seen as a game board with 15 lines (numbered from 0 to 14) and 15 columns (numbered from 0 to 14).
+
+To materialize it, one writes a file 'labyrinth.txt' of 15 lines composed of 15 characters each.
+These characters symbolize either a 'path' box through which MacGyver can move if it is a '' space '' character, or a 'wall' box that prevents MacGyver from moving around if it is a character "X".
+
+We instantiate a labyrinth from the class 'Labyrinth'.
+We instantiate the MacGyver character (instance 'macGyver') from the class 'Hero'.
+We randomly position 3 objects on the path that MacGyver can traverse.
+
+A position is determined along the x and y axes (abscissa and ordinate).
+The character starts at the top left of the labyrinth (x = 0, y = 0).
+The end of the labyrinth is at the bottom right of the labyrinth (x = 14, y = 14).
+
+The player wins if he manages to drive MacGyver to the finish square after picking up the 3 items.
+If he has not picked up all the objects by reaching the end, he loses.
+
+
+----------
+FR
+"Aidez MacGyver à s'échapper !"
 OpenClassrooms parcours DA Python - projet 3
 -----
 

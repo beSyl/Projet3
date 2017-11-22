@@ -1,44 +1,44 @@
-"""Classe 'Labyrinth' du jeu 'Aidez MacGyver à s'échapper !'
-Utile à la structure du labyrinthe.
-Méthodes : init, create, place_objects, show."""
+"""Class 'Labyrinth' - 'Help MacGyver to escape ! game'
+Useful for making the structure of the labyrinth.
+Methods : init, create, place_objects, show."""
 
 import random
 import pygame
 from pygame.locals import * 
-from constantes import *
+from constants import *
 
 class Labyrinth:
-    """Classe permettant de créer un labyrinthe de jeu."""
+    """Create a labyrinth."""
     def __init__(self):
         self.fichier = 'labyrinth.txt'
         self.structure = 0
     
     
     def create(self):
-        """Méthode de classe Labyrinth.
-        Générer le labyrinthe à partir du fichier txt.
-        On crée une liste, contenant une liste par ligne à afficher.""" 
-        #On ouvre le fichier
+        """Class Labyrinth method.
+        Make a labyrinth from a file '.txt'.
+        Make a list, containing a list for each line to display.""" 
+        #Open file
         with open(self.fichier, "r") as file:
             list_structure = []
-            #On parcourt les lignes du fichier
+            #Go through the lines of the file
             for line in file:
                 list_line = []
-                #On parcourt les lettres contenus dans le fichier, symbolisant les cases
+                #Go through characters in the file, meaning the squares
                 for sprite in line:
-                    #On ignore les sauts de ligne
+                    #Ignore line breaks
                     if sprite != '\n':
-                        #On ajoute chaque lettre à la liste de la ligne
+                        #Add each character to the line list
                         list_line.append(sprite)
-                #On ajoute la ligne à la liste générale
+                #Add the line to the general list
                 list_structure.append(list_line)
-            #On sauvegarde cette structure
+            #Record the structure of the labyrinth
             self.structure = list_structure
 
 
     def place_objects(self):
-        """Méthode de classe Labyrinth.
-        Placer les objets dans le labyrinthe, en modifiant la liste de structure du labyrinthe ('self.structure').""" 
+        """Class Labyrinth method.
+        Place the objects in the labyrinth, changing the structure list ('self.structure').""" 
         #On ouvre le fichier
         i = 0
         while i < 3:
@@ -52,41 +52,39 @@ class Labyrinth:
                         if i == 2:
                                 self.structure[number1][number2] = "T" #tube
                         i+=1
-
+        #[DELETE AT THE END OF THE DEVELOPMENT] Display and check the structure
         print(str(self.structure))
 
                 
     def show(self, window):
-        """Méthode de classe Labyrinth.
-        Afficher le plateau de jeu en fonction de la liste de structure du labyrinthe ('self.structure')."""
-        #Chargement des images
+        """Classe Labyrinth method.
+        Display the game according to the structure list ('self.structure')."""
+        #Loading pictures
         guardian = pygame.image.load(picture_guardian).convert_alpha()
         wall = pygame.image.load(picture_wall).convert()
         ether = pygame.image.load(picture_ether).convert_alpha()
         needle = pygame.image.load(picture_needle).convert_alpha()
         tube = pygame.image.load(picture_tube).convert_alpha()
 
-        #Déterminer la position dans la fenêtre Pygame selon la position abscisse/ordonnée.
-        #Utiliser la dimension d'un sprite (case dans Pygame).
+        #Determine the position in the Pygame window according to abscissa/ordinate
+        #Use the dimension of a sprite (Pygame square)
         num_line = 0
         for line in self.structure:
-            #On parcourt les listes de lignes
+            #Go through the lines lists
             num_square = 0
             for sprite in line:
-                #On calcule la position réelle en pixels
+                #Determine the position to display (in pixels)
                 x = num_square * sprite_dimension
                 y = num_line * sprite_dimension
-                if sprite == 'X':          #m = Mur
+                if sprite == 'X':          #X = wall
                     window.blit(wall, (x,y))
-                elif sprite == 'E':        #E = Ether
+                elif sprite == 'E':        #E = ether
                     window.blit(ether, (x,y))
-                elif sprite == 'N':        #N = Needle
+                elif sprite == 'N':        #N = needle
                     window.blit(needle, (x,y))
-                elif sprite == 'T':        #T = Tube
+                elif sprite == 'T':        #T = tube
                     window.blit(tube, (x,y))
-                elif sprite == 'e':        #a = End
+                elif sprite == 'e':        #e = end
                     window.blit(guardian, (x,y))
-                elif sprite == 'L':        #L = Lose
-                    window.blit(lose, (x,y))
                 num_square += 1
             num_line += 1

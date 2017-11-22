@@ -1,15 +1,15 @@
-"""Classe 'Hero' du jeu 'Aidez MacGyver à s'échapper !'
-Utile à la gestion du personnage.
-Méthodes : init, move, run_pygame, check_victory.
+"""Class 'Hero' - 'Help MacGyver to escape !' game
+Useful for character management.
+Methods : init, move, run_pygame, check_victory.
 """
 
 import random
 import pygame
 from pygame.locals import * 
-from constantes import *
+from constants import *
 
 class Hero:
-    """Méthode permettant de créer un personnage"""
+    """Class hero method - Create a character"""
     def __init__(self, picture, game):
         #Avatar du personnage
         self.picture = pygame.image.load(picture).convert_alpha()
@@ -25,9 +25,9 @@ class Hero:
     
     
     def move(self, direction):
-        """Méthode de classe Hero.
-        Déplacer le personnage : haut, bas, droite et gauche."""
-        #Déplacement vers la droite
+        """Class hero method.
+        Move the character : up, down, left and rigth."""
+        #Go to the right.
         if direction == 'right':
             #Pour ne pas dépasser l'écran
             if self.case_x < (squares_per_side - 1):
@@ -38,21 +38,21 @@ class Hero:
                     #Calcul de la position à afficher dans la fenêtre Pygame, en pixel
                     self.x = self.case_x * sprite_dimension
         
-        #Déplacement vers la gauche
+        #Go to the left
         if direction == 'left':
             if self.case_x > 0:
                 if self.game.structure[self.case_y][self.case_x-1] != 'X':
                     self.case_x -= 1
                     self.x = self.case_x * sprite_dimension
         
-        #Déplacement vers le haut
+        #Go to the top
         if direction == 'up':
             if self.case_y > 0:
                 if self.game.structure[self.case_y-1][self.case_x] != 'X':
                     self.case_y -= 1
                     self.y = self.case_y * sprite_dimension
         
-        #Déplacement vers le bas
+        #Go down
         if direction == 'down':
             if self.case_y < (squares_per_side - 1):
                 if self.game.structure[self.case_y+1][self.case_x] != 'X':
@@ -60,15 +60,15 @@ class Hero:
                     self.y = self.case_y * sprite_dimension
 
     def run_pygame(self):
-        """Méthode de classe Hero.
-        Gérer les déplacements au clavier : haut, bas, droite et gauche."""
+        """Class hero method.
+        Manage the movements on the keyboard : up, down, right and left."""
         for event in pygame.event.get():
             if event.type == KEYDOWN:
-                #Si l'utilisateur presse Echap ici, on revient seulement au menu
+                #If the player press Escape key, go back to the beginning of game loop
                 if event.key == K_ESCAPE:
                     continuer_jeu = 0
                     
-            #Touches de déplacement de MacGyver
+            #Keyboard keys useful for the movements
                 elif event.key == K_RIGHT:
                     self.move('right')
                 elif event.key == K_LEFT:
@@ -79,8 +79,8 @@ class Hero:
                     self.move('down')
 
     def check_victory(self):
-        """Méthode de classe Hero.
-        Vérifier les conditions de victoire lorsque le personnage arrive en fin de jeu."""
+        """Class hero method.
+        Check if all the conditions are met to win when the character ends the game."""
         if self.cart == 3:
             self.victory = True
         else:
