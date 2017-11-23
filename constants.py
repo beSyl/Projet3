@@ -1,12 +1,12 @@
 """Constants - 'Help MacGyver to escape !' game
 """
 
-#Pygame window dimensions
+# Pygame window dimensions
 squares_per_side = 15
 sprite_dimension = 40
 window_size = squares_per_side * sprite_dimension
 
-#Pictures
+# Pictures
 picture_victory = "images/victory.png"
 picture_defeat = "images/defeat.png"
 picture_background = "images/background.png"
