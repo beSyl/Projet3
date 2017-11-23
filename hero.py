@@ -63,13 +63,9 @@ class Hero:
         """Class hero method.
         Manage the movements on the keyboard : up, down, right and left."""
         for event in pygame.event.get():
-            if event.type == KEYDOWN:
-                #If the player press Escape key, go back to the beginning of game loop
-                if event.key == K_ESCAPE:
-                    continuer_jeu = 0
-                    
+            if event.type == KEYDOWN:                    
             #Keyboard keys useful for the movements
-                elif event.key == K_RIGHT:
+                if event.key == K_RIGHT:
                     self.move('right')
                 elif event.key == K_LEFT:
                     self.move('left')
