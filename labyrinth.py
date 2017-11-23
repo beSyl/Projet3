@@ -30,7 +30,6 @@ class Labyrinth:
                     if sprite != '\n':
                         # Add each character to the line list
                         list_line.append(sprite)
-                # Add the line to the general list
                 self.structure.append(list_line)
 
     def place_objects(self):
