@@ -13,7 +13,7 @@ class Labyrinth:
 
     def __init__(self):
         self.fichier = 'labyrinth.txt'
-        self.structure = 0
+        self.structure = []
 
     def create(self):
         """Class Labyrinth method.
@@ -21,7 +21,6 @@ class Labyrinth:
         Make a list, containing a list for each line to display."""
         # Open file
         with open(self.fichier, "r") as file:
-            list_structure = []
             # Go through the lines of the file
             for line in file:
                 list_line = []
@@ -32,9 +31,7 @@ class Labyrinth:
                         # Add each character to the line list
                         list_line.append(sprite)
                 # Add the line to the general list
-                list_structure.append(list_line)
-            # Record the structure of the labyrinth
-            self.structure = list_structure
+                self.structure.append(list_line)
 
     def place_objects(self):
         """Class Labyrinth method.
