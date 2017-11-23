@@ -77,7 +77,8 @@ class Hero:
 
     def check_victory(self):
         """Class hero method.
-        Check if all the conditions are met to win when the character ends the game."""
+        Check if all the conditions are met to win when the character ends the game.
+        If the hero picks up trhee items, victory is 'True'. Otherwise, he loses and victory is 'False'."""
         if self.cart == 3:
             self.victory = True
         else:

@@ -65,7 +65,7 @@ while play == 1:
             macGyver.check_victory()
             if macGyver.victory == True:
                 picture = pygame.image.load(picture_victory).convert()
-            elif macGyver.victory == False:
+            else:
                 picture = pygame.image.load(picture_defeat).convert()
 
             window.blit(picture, (0, 0))
