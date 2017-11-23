@@ -11,8 +11,8 @@ from constants import *
 class Labyrinth:
     """Create a labyrinth."""
 
-    def __init__(self):
-        self.fichier = 'labyrinth.txt'
+    def __init__(self, file='labyrinth.txt'):
+        self.file = file
         self.structure = []
         self.create()
         self.place_objects()
@@ -22,7 +22,7 @@ class Labyrinth:
         Make a labyrinth from a file '.txt'.
         Make a list, containing a list for each line to display."""
         # Open file
-        with open(self.fichier, "r") as file:
+        with open(self.file, "r") as file:
             # Go through the lines of the file
             for line in file:
                 list_line = []
@@ -37,7 +37,7 @@ class Labyrinth:
     def place_objects(self):
         """Class Labyrinth method.
         Place the objects in the labyrinth, changing the structure list ('self.structure')."""
-        # On ouvre le fichier
+        # Open file
         i = 0
         while i < 3:
             number1 = random.randint(0, 14)
