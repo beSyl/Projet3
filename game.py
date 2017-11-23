@@ -25,8 +25,6 @@ while play == 1:
 
     # Make a labyrinth from a file
     labyrinth = Labyrinth()
-    labyrinth.create()
-    labyrinth.place_objects()
     labyrinth.show(window)
 
     # Create character

@@ -14,6 +14,8 @@ class Labyrinth:
     def __init__(self):
         self.fichier = 'labyrinth.txt'
         self.structure = []
+        self.create()
+        self.place_objects()
 
     def create(self):
         """Class Labyrinth method.
@@ -43,9 +45,9 @@ class Labyrinth:
             if self.structure[number1][number2] == " ":
                 if i == 0:
                     self.structure[number1][number2] = "E"  # ether
-                if i == 1:
+                elif i == 1:
                     self.structure[number1][number2] = "N"  # needle
-                if i == 2:
+                elif i == 2:
                     self.structure[number1][number2] = "T"  # tube
                 i += 1
         # [DELETE AT THE END OF THE DEVELOPMENT] Display and check the structure
