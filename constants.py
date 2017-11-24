@@ -1,7 +1,9 @@
 """Constants - 'Help MacGyver to escape !' game
+This file contains Pygame window's dimensions
+and the links to the pictures saved in the 'images' directory.
 """
 
-# Pygame window dimensions
+# Pygame window's dimensions
 squares_per_side = 15
 sprite_dimension = 40
 window_size = squares_per_side * sprite_dimension

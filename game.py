@@ -19,7 +19,8 @@ def main():
     # MAIN LOOP
     while play:
         # Make a labyrinth from a file
-        labyrinth = Labyrinth(my_pygame)
+        labyrinth = Labyrinth()
+        my_pygame.display_elements(labyrinth)
         # Create character
         mac_gyver = Hero(labyrinth)
         game = True

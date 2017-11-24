@@ -8,12 +8,11 @@ from my_pygame import *
 class Labyrinth:
     """Create a labyrinth."""
 
-    def __init__(self, pygame_instance, file='labyrinth.txt'):
+    def __init__(self, file='labyrinth.txt'):
         self.file = file
         self.structure = []
         self.create()
         self.place_objects()
-        self.show(pygame_instance)
 
     def create(self):
         """Class Labyrinth method.
@@ -50,32 +49,6 @@ class Labyrinth:
                 i += 1
         # [DELETE AT THE END OF THE DEVELOPMENT] Display and check the structure
         print(str(self.structure))
-
-    def show(self, pygame_instance):
-        """Classe Labyrinth method.
-        Display the game according to the structure list ('self.structure')."""
-        # Determine the position in the Pygame window according to abscissa/ordinate
-        # Use the dimension of a sprite (Pygame square)
-        num_line = 0
-        for line in self.structure:
-            # Go through the lines lists
-            num_square = 0
-            for sprite in line:
-                # Determine the position to display (in pixels)
-                x = num_square * sprite_dimension
-                y = num_line * sprite_dimension
-                if sprite == 'X':  # X = wall
-                    pygame_instance.window.blit(pygame_instance.wall, (x, y))
-                elif sprite == 'E':  # E = ether
-                    pygame_instance.window.blit(pygame_instance.ether, (x, y))
-                elif sprite == 'N':  # N = needle
-                    pygame_instance.window.blit(pygame_instance.needle, (x, y))
-                elif sprite == 'T':  # T = tube
-                    pygame_instance.window.blit(pygame_instance.tube, (x, y))
-                elif sprite == 'e':  # e = end
-                    pygame_instance.window.blit(pygame_instance.guardian, (x, y))
-                num_square += 1
-            num_line += 1
 
     def finish(self, hero, pygame_instance):
         if self.structure[hero.case_y][hero.case_x] == 'e':

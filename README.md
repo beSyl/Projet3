@@ -13,7 +13,7 @@ To materialize it, one writes a file 'labyrinth.txt' of 15 lines composed of 15 
 These characters symbolize either a 'path' box through which MacGyver can move if it is a '' space '' character, or a 'wall' box that prevents MacGyver from moving around if it is a character "X".
 
 We instantiate a labyrinth from the class 'Labyrinth'.
-We instantiate the MacGyver character (instance 'macGyver') from the class 'Hero'.
+We instantiate the MacGyver character (instance 'mac_gyver') from the class 'Hero'.
 We randomly position 3 objects on the path that MacGyver can traverse.
 
 A position is determined along the x and y axes (abscissa and ordinate).
@@ -40,7 +40,7 @@ Pour le matérialiser, on rédige un fichier 'labyrinth.txt' de 15 lignes compos
 Ces caractères symbolisent soit une case 'chemin' via laquelle MacGyver peut se déplacer s'il s'agit d'un caractère espace «  », soit une case 'mur' empêchant MacGyver de se déplacer s'il s'agit d'un caractère « X ».
 
 On instancie un labyrinthe à partir de la classe 'Labyrinth'.
-On instancie le personnage MacGyver (instance 'macGyver') à partir de la classe 'Hero'.
+On instancie le personnage MacGyver (instance 'mac_gyver') à partir de la classe 'Hero'.
 On positionne 3 objets de manière aléatoire sur le chemin que MacGyver peut parcourir.
 
 Une position se détermine selon les axes x et y (abscisse et ordonnée).
