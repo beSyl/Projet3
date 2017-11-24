@@ -2,8 +2,9 @@
 Useful for Pygame management (display).
 Methods : init, move, run_pygame, check_victory.
 """
-from constants import *
 import pygame
+from pygame.locals import *
+from constants import *
 
 
 class My_pygame:
@@ -30,6 +31,9 @@ class My_pygame:
         self.ether = pygame.image.load(picture_ether).convert_alpha()
         self.needle = pygame.image.load(picture_needle).convert_alpha()
         self.tube = pygame.image.load(picture_tube).convert_alpha()
+
+    def calculate_in_pixels(self, x):
+        return x * sprite_dimension
 
     def refresh(self, laby, hero):
         self.window.blit(self.background, (0, 0))

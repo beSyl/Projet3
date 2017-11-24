@@ -2,8 +2,6 @@
 Useful for character management.
 Methods : init, move, run_pygame, check_victory.
 """
-
-import random
 import pygame
 from pygame.locals import *
 from constants import *
@@ -25,7 +23,7 @@ class Hero:
         # Panier dans lequel stocker les objets ramassés.
         self.cart = 0
 
-    def move(self, direction):
+    def move(self, direction, pygame_instance):
         """Class hero method.
         Move the character : up, down, left and rigth."""
         # Go to the right.
@@ -36,44 +34,42 @@ class Hero:
                 if self.game.structure[self.case_y][self.case_x + 1] != 'X':
                     # Déplacement d'une case en abscisse
                     self.case_x += 1
-                    # Calcul de la position à afficher dans la fenêtre Pygame, en pixel
-                    self.x = self.case_x * sprite_dimension
 
         # Go to the left
         elif direction == 'left':
             if self.case_x > 0:
                 if self.game.structure[self.case_y][self.case_x - 1] != 'X':
                     self.case_x -= 1
-                    self.x = self.case_x * sprite_dimension
 
         # Go to the top
         elif direction == 'up':
             if self.case_y > 0:
                 if self.game.structure[self.case_y - 1][self.case_x] != 'X':
                     self.case_y -= 1
-                    self.y = self.case_y * sprite_dimension
 
         # Go down
         elif direction == 'down':
             if self.case_y < (squares_per_side - 1):
                 if self.game.structure[self.case_y + 1][self.case_x] != 'X':
                     self.case_y += 1
-                    self.y = self.case_y * sprite_dimension
 
-    def activate(self):
+        self.x = pygame_instance.calculate_in_pixels(self.case_x)
+        self.y = pygame_instance.calculate_in_pixels(self.case_y)
+
+    def activate(self, pygame_instance):
         """Class hero method.
         Manage the movements on the keyboard : up, down, right and left."""
         for event in pygame.event.get():
             if event.type == KEYDOWN:
                 # Keyboard keys useful for the movements
                 if event.key == K_RIGHT:
-                    self.move('right')
+                    self.move('right', pygame_instance)
                 elif event.key == K_LEFT:
-                    self.move('left')
+                    self.move('left', pygame_instance)
                 elif event.key == K_UP:
-                    self.move('up')
+                    self.move('up', pygame_instance)
                 elif event.key == K_DOWN:
-                    self.move('down')
+                    self.move('down', pygame_instance)
 
     def check_victory(self):
         """Class hero method.

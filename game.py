@@ -2,7 +2,6 @@
 OpenClassrooms course DA Python - Project 3
 https://openclassrooms.com/projects/aidez-macgyver-a-sechapper
 """
-
 from labyrinth import *
 from hero import *
 from my_pygame import *
@@ -22,7 +21,7 @@ while play == 1:
 
     # GAME LOOP
     while game:
-        mac_gyver.activate()
+        mac_gyver.activate(my_pygame)
         my_pygame.refresh(labyrinth, mac_gyver)
 
         # Pick up an object
@@ -37,6 +36,5 @@ while play == 1:
         if labyrinth.structure[mac_gyver.case_y][mac_gyver.case_x] == 'e':
             mac_gyver.check_victory()
             my_pygame.show_destiny(mac_gyver)
-
             play = 0
             game = 0
