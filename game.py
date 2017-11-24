@@ -25,14 +25,7 @@ def main():
         while game:
             mac_gyver.activate(my_pygame)
             my_pygame.refresh(labyrinth, mac_gyver)
-
-            # Pick up an object
-            if labyrinth.structure[mac_gyver.case_y][mac_gyver.case_x] in ['E', 'N', 'T']:
-                mac_gyver.cart += 1
-                labyrinth.structure[mac_gyver.case_y][mac_gyver.case_x] = ' '
-                if __name__ == "__main__":
-                    print("Objet(s) dans le panier : " + str(mac_gyver.cart))
-                    print(str(labyrinth.structure))
+            mac_gyver.pick_up(labyrinth)
 
             # End of game
             if labyrinth.structure[mac_gyver.case_y][mac_gyver.case_x] == 'e':

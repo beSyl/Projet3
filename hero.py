@@ -71,6 +71,13 @@ class Hero:
                 elif event.key == K_DOWN:
                     self.move('down', pygame_instance)
 
+    def pick_up(self, laby):
+        if laby.structure[self.case_y][self.case_x] in ['E', 'N', 'T']:
+            self.cart += 1
+            laby.structure[self.case_y][self.case_x] = ' '
+            print("Objet(s) dans le panier : " + str(self.cart))
+            print(str(laby.structure))
+
     def check_victory(self):
         """Class hero method.
         Check if all the conditions are met to win when the character ends the game.
