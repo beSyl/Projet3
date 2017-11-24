@@ -1,7 +1,6 @@
 """Class 'Labyrinth' - 'Help MacGyver to escape ! game'
 Useful for making the structure of the labyrinth.
-Methods : init, create, place_objects, show."""
-
+Methods : init, create, place_objects, show, finish."""
 import random
 from my_pygame import *
 
@@ -77,3 +76,8 @@ class Labyrinth:
                     pygame_instance.window.blit(pygame_instance.guardian, (x, y))
                 num_square += 1
             num_line += 1
+
+    def finish(self, hero, pygame_instance):
+        if self.structure[hero.case_y][hero.case_x] == 'e':
+            hero.check_victory()
+            pygame_instance.show_destiny(hero)
