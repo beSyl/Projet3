@@ -3,19 +3,18 @@ Useful for making the structure of the labyrinth.
 Methods : init, create, place_objects, show."""
 
 import random
-import pygame
-from pygame.locals import *
-from constants import *
+from my_pygame import *
 
 
 class Labyrinth:
     """Create a labyrinth."""
 
-    def __init__(self, file='labyrinth.txt'):
+    def __init__(self, pygame_instance, file='labyrinth.txt'):
         self.file = file
         self.structure = []
         self.create()
         self.place_objects()
+        self.show(pygame_instance)
 
     def create(self):
         """Class Labyrinth method.
@@ -53,16 +52,9 @@ class Labyrinth:
         # [DELETE AT THE END OF THE DEVELOPMENT] Display and check the structure
         print(str(self.structure))
 
-    def show(self, window):
+    def show(self, pygame_instance):
         """Classe Labyrinth method.
         Display the game according to the structure list ('self.structure')."""
-        # Loading pictures
-        guardian = pygame.image.load(picture_guardian).convert_alpha()
-        wall = pygame.image.load(picture_wall).convert()
-        ether = pygame.image.load(picture_ether).convert_alpha()
-        needle = pygame.image.load(picture_needle).convert_alpha()
-        tube = pygame.image.load(picture_tube).convert_alpha()
-
         # Determine the position in the Pygame window according to abscissa/ordinate
         # Use the dimension of a sprite (Pygame square)
         num_line = 0
@@ -74,14 +66,14 @@ class Labyrinth:
                 x = num_square * sprite_dimension
                 y = num_line * sprite_dimension
                 if sprite == 'X':  # X = wall
-                    window.blit(wall, (x, y))
+                    pygame_instance.window.blit(pygame_instance.wall, (x, y))
                 elif sprite == 'E':  # E = ether
-                    window.blit(ether, (x, y))
+                    pygame_instance.window.blit(pygame_instance.ether, (x, y))
                 elif sprite == 'N':  # N = needle
-                    window.blit(needle, (x, y))
+                    pygame_instance.window.blit(pygame_instance.needle, (x, y))
                 elif sprite == 'T':  # T = tube
-                    window.blit(tube, (x, y))
+                    pygame_instance.window.blit(pygame_instance.tube, (x, y))
                 elif sprite == 'e':  # e = end
-                    window.blit(guardian, (x, y))
+                    pygame_instance.window.blit(pygame_instance.guardian, (x, y))
                 num_square += 1
             num_line += 1

@@ -3,20 +3,11 @@ OpenClassrooms course DA Python - Project 3
 https://openclassrooms.com/projects/aidez-macgyver-a-sechapper
 """
 
-import pygame
-from pygame.locals import *
-
 from labyrinth import *
 from hero import *
-from constants import *
+from my_pygame import *
 
-pygame.init()
-
-# Open Pygame window(square, so width = height)
-window = pygame.display.set_mode((window_size, window_size))
-
-# Continue the movement if the direction key is held down for 50 ms (1st argument), then repeated every 80 ms (2nd argument).
-pygame.key.set_repeat(50, 80)
+my_pygame = My_pygame()
 
 # PRINCIPAL LOOP
 play = 1
@@ -24,49 +15,28 @@ play = 1
 while play == 1:
 
     # Make a labyrinth from a file
-    labyrinth = Labyrinth()
-    labyrinth.show(window)
-
+    labyrinth = Labyrinth(my_pygame)
     # Create character
-    macGyver = Hero("images/macGyver.png", labyrinth)
+    mac_gyver = Hero(labyrinth)
     game = 1
 
     # GAME LOOP
     while game:
-        # Load and display the background picture
-        background = pygame.image.load(picture_background).convert()
-        window.blit(background, (0, 0))
-
-        # Speed limitation of the loop
-        pygame.time.Clock().tick(20)
-
-        # Keyboard movement
-        macGyver.run_pygame()
-
-        # Display the new position
-        window.blit(background, (0, 0))
-        labyrinth.show(window)
-        window.blit(macGyver.picture, (macGyver.x, macGyver.y))  # MacGyver avatar.
-        pygame.display.flip()
+        mac_gyver.activate()
+        my_pygame.refresh(labyrinth, mac_gyver)
 
         # Pick up an object
-        if labyrinth.structure[macGyver.case_y][macGyver.case_x] == 'E' or labyrinth.structure[macGyver.case_y][
-            macGyver.case_x] == 'N' or labyrinth.structure[macGyver.case_y][macGyver.case_x] == 'T':
-            macGyver.cart += 1
-            labyrinth.structure[macGyver.case_y][macGyver.case_x] = ' '
+        if labyrinth.structure[mac_gyver.case_y][mac_gyver.case_x] in ['E', 'N', 'T']:
+            mac_gyver.cart += 1
+            labyrinth.structure[mac_gyver.case_y][mac_gyver.case_x] = ' '
             if __name__ == "__main__":
-                print("Objet(s) dans le panier : " + str(macGyver.cart))
+                print("Objet(s) dans le panier : " + str(mac_gyver.cart))
                 print(str(labyrinth.structure))
 
         # End of game
-        if labyrinth.structure[macGyver.case_y][macGyver.case_x] == 'e':
-            macGyver.check_victory()
-            if macGyver.victory == True:
-                picture = pygame.image.load(picture_victory).convert()
-            else:
-                picture = pygame.image.load(picture_defeat).convert()
+        if labyrinth.structure[mac_gyver.case_y][mac_gyver.case_x] == 'e':
+            mac_gyver.check_victory()
+            my_pygame.show_destiny(mac_gyver)
 
-            window.blit(picture, (0, 0))
-            pygame.display.flip()
             play = 0
             game = 0

@@ -12,9 +12,9 @@ from constants import *
 class Hero:
     """Class hero method - Create a character"""
 
-    def __init__(self, picture, game):
+    def __init__(self, game):
         # Avatar du personnage
-        self.picture = pygame.image.load(picture).convert_alpha()
+        # self.picture = pygame.image.load(picture).convert_alpha()
         # Position du personnage en cases et en pixels
         self.case_x = 0
         self.case_y = 0
@@ -40,27 +40,27 @@ class Hero:
                     self.x = self.case_x * sprite_dimension
 
         # Go to the left
-        if direction == 'left':
+        elif direction == 'left':
             if self.case_x > 0:
                 if self.game.structure[self.case_y][self.case_x - 1] != 'X':
                     self.case_x -= 1
                     self.x = self.case_x * sprite_dimension
 
         # Go to the top
-        if direction == 'up':
+        elif direction == 'up':
             if self.case_y > 0:
                 if self.game.structure[self.case_y - 1][self.case_x] != 'X':
                     self.case_y -= 1
                     self.y = self.case_y * sprite_dimension
 
         # Go down
-        if direction == 'down':
+        elif direction == 'down':
             if self.case_y < (squares_per_side - 1):
                 if self.game.structure[self.case_y + 1][self.case_x] != 'X':
                     self.case_y += 1
                     self.y = self.case_y * sprite_dimension
 
-    def run_pygame(self):
+    def activate(self):
         """Class hero method.
         Manage the movements on the keyboard : up, down, right and left."""
         for event in pygame.event.get():
