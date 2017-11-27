@@ -1,87 +1,69 @@
 """Class 'Hero' - 'Help MacGyver to escape !' game
 Useful for character management.
-Methods : init, move, run_pygame, check_victory.
+Methods : init, move, pick_up, check_victory.
 """
-import pygame
-from pygame.locals import *
 from constants import *
 
 
 class Hero:
-    """Class hero method - Create a character"""
+    """Class hero method - Create a character.
+    """
 
     def __init__(self, game):
-        # Avatar du personnage
-        # self.picture = pygame.image.load(picture).convert_alpha()
-        # Position du personnage en cases et en pixels
-        self.case_x = 0
-        self.case_y = 0
+        # Hero's position, expressed in squares then in pixels.
+        self.square_x = 0
+        self.square_y = 0
         self.x = 0
         self.y = 0
-        # Plateau de jeu dans lequel le personnage évolue.
+        # Labyrinth in which the character evolves.
         self.game = game
-        # Panier dans lequel stocker les objets ramassés.
+        # Cart in which to store the collected items.
         self.cart = 0
 
     def move(self, direction, pygame_instance):
-        """Class hero method.
-        Move the character : up, down, left and rigth."""
-        # Go to the right.
-        if direction == 'right':
-            # Pour ne pas dépasser l'écran
-            if self.case_x < (squares_per_side - 1):
-                # On vérifie que la case de destination n'est pas un mur
-                if self.game.structure[self.case_y][self.case_x + 1] != 'X':
-                    # Déplacement d'une case en abscisse
-                    self.case_x += 1
+        """Class Hero method.
+        Move the character : up, down, left and rigth.
+        """
+        if direction == 'right' and self.check_square(self.square_x + 1, self.square_y):
+            self.square_x += 1
+        elif direction == 'left' and self.check_square(self.square_x - 1, self.square_y):
+            self.square_x -= 1
+        elif direction == 'up' and self.check_square(self.square_x, self.square_y - 1):
+            self.square_y -= 1
+        elif direction == 'down' and self.check_square(self.square_x, self.square_y + 1):
+            self.square_y += 1
 
-        # Go to the left
-        elif direction == 'left':
-            if self.case_x > 0:
-                if self.game.structure[self.case_y][self.case_x - 1] != 'X':
-                    self.case_x -= 1
+        self.x = pygame_instance.calculate_in_pixels(self.square_x)
+        self.y = pygame_instance.calculate_in_pixels(self.square_y)
 
-        # Go to the top
-        elif direction == 'up':
-            if self.case_y > 0:
-                if self.game.structure[self.case_y - 1][self.case_x] != 'X':
-                    self.case_y -= 1
+    def check_coord(self, x, y):
+        """Class Hero method.
+        Check if the movement stays in the limits of the labyrinth.
+        """
+        return 0 <= x < (squares_per_side) and 0 <= y < (squares_per_side)
 
-        # Go down
-        elif direction == 'down':
-            if self.case_y < (squares_per_side - 1):
-                if self.game.structure[self.case_y + 1][self.case_x] != 'X':
-                    self.case_y += 1
-
-        self.x = pygame_instance.calculate_in_pixels(self.case_x)
-        self.y = pygame_instance.calculate_in_pixels(self.case_y)
-
-    def activate(self, pygame_instance):
-        """Class hero method.
-        Manage the movements on the keyboard : up, down, right and left."""
-        for event in pygame.event.get():
-            if event.type == KEYDOWN:
-                # Keyboard keys useful for the movements
-                if event.key == K_RIGHT:
-                    self.move('right', pygame_instance)
-                elif event.key == K_LEFT:
-                    self.move('left', pygame_instance)
-                elif event.key == K_UP:
-                    self.move('up', pygame_instance)
-                elif event.key == K_DOWN:
-                    self.move('down', pygame_instance)
+    def check_square(self, x, y):
+        """Class Hero method.
+        Check if the movement stays in the limits of the labyrinth with 'check_coord()', then if it goes to a wall.
+        """
+        return self.check_coord(x, y) and self.game.structure[y][x] != 'X'
 
     def pick_up(self, laby):
-        if laby.structure[self.case_y][self.case_x] in ['E', 'N', 'T']:
+        """Class Hero method.
+        Add 1 to the heros's cart and delete the picture of an object if the hero picks it up.
+        """
+        if laby.structure[self.square_y][self.square_x] in ['E', 'N', 'T']:
             self.cart += 1
-            laby.structure[self.case_y][self.case_x] = ' '
+            laby.structure[self.square_y][self.square_x] = ' '
+            # [TEST] Display how many objects are in the hero's cart and the refreshed structure.
             print("Objet(s) dans le panier : " + str(self.cart))
             print(str(laby.structure))
 
     def check_victory(self):
-        """Class hero method.
+        """Class Hero method.
         Check if all the conditions are met to win when the character ends the game.
-        If the hero picks up trhee items, victory is 'True'. Otherwise, he loses and victory is 'False'."""
+        If the hero picks up trhee items, victory is 'True'. Otherwise, he loses and victory is 'False'.
+        """
         if self.cart == 3:
             self.victory = True
         else:
