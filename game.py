@@ -9,31 +9,34 @@ from my_pygame import *
 
 def main():
     """Main function that load and display all the objects of the Pygame window.
+    'Play' is True when the player wants to.
     Then, it loads the labyrinth structure and the hero in a main game loop,
-    and finally the hero's actions (move, pick-up an object, ...) are managed in the second loop
-    that ends when the hero comes to the end.
+    so 'game' is True to symbolize the beginning of the game.
+    Finally, as long as 'game' is True, the hero's actions (move, pick-up an object, ...) are managed
+    in the second loop that ends when the hero comes to the end.
     Depending on the number of items picked up by the hero, either he wins or loses.
+    There, 'game' becomes False and 'play' depends of the player's choice.
     """
-    my_pygame = My_pygame()
-    play = True
+    my_pygame = MyPygame()
+
     # MAIN LOOP
-    while play:
+    while my_pygame.play:
         # Make a labyrinth from a file
         labyrinth = Labyrinth()
-        my_pygame.display_elements(labyrinth)
         # Create character
         mac_gyver = Hero(labyrinth)
-        game = True
+        # Manage displaying and keyboard with Pygame
+        my_pygame.display_elements(labyrinth, mac_gyver)
 
         # GAME LOOP
-        while game:
-            mac_gyver.activate(my_pygame)
+        while my_pygame.game:
             my_pygame.refresh(labyrinth, mac_gyver)
             mac_gyver.pick_up(labyrinth)
-            if labyrinth.structure[mac_gyver.case_y][mac_gyver.case_x] == 'e':
-                labyrinth.finish(mac_gyver, my_pygame)
-                play = False
-                game = False
+            if labyrinth.structure[mac_gyver.square_y][mac_gyver.square_x] == 'e':
+                mac_gyver.check_victory()
+                my_pygame.show_destiny(mac_gyver)
+                my_pygame.game = False
+        my_pygame.play = False
 
 
 if __name__ == "__main__":

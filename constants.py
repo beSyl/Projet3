@@ -3,10 +3,10 @@ This file contains Pygame window's dimensions
 and the links to the pictures saved in the 'images' directory.
 """
 
-# Pygame window's dimensions
+# Pygame window's sizes (squares per side in units, sprite size in pixels).
 squares_per_side = 15
-sprite_dimension = 40
-window_size = squares_per_side * sprite_dimension
+sprite_size = 40
+window_size = squares_per_side * sprite_size
 
 # Pictures
 picture_hero = "images/mac_gyver.png"

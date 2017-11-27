@@ -1,6 +1,6 @@
 """Class 'Hero' - 'Help MacGyver to escape !' game
 Useful for character management.
-Methods : init, move, pick_up, check_victory.
+Methods : init, move, check_coord, check_square, pick_up, check_victory.
 """
 from constants import *
 

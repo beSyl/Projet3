@@ -1,12 +1,13 @@
 """Class 'Labyrinth' - 'Help MacGyver to escape ! game'
 Useful for making the structure of the labyrinth.
-Methods : init, create, place_objects, show, finish."""
+Methods : init, create, place_objects."""
 import random
 from my_pygame import *
 
 
 class Labyrinth:
-    """Create a labyrinth."""
+    """Create a labyrinth.
+    """
 
     def __init__(self, file='labyrinth.txt'):
         self.file = file
@@ -47,10 +48,5 @@ class Labyrinth:
                 elif i == 2:
                     self.structure[number1][number2] = "T"  # tube
                 i += 1
-        # [DELETE AT THE END OF THE DEVELOPMENT] Display and check the structure
+        # [TEST] Display and check the structure
         print(str(self.structure))
-
-    def finish(self, hero, pygame_instance):
-        if self.structure[hero.case_y][hero.case_x] == 'e':
-            hero.check_victory()
-            pygame_instance.show_destiny(hero)
