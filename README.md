@@ -3,9 +3,11 @@
 OpenClassrooms DA Python Course - Project 3
 -----
 
-The file 'jeu.py' corresponds to the program whose modules are 'contantes.py', 'Labyrinth.py' (class), 'Hero.py' (class).
+Needs Python 3, Pygame 1.9.3
+
+The file 'game.py' corresponds to the program whose modules are 'contants.py', 'labyrinth.py' (class), 'hero.py' (class) and 'my_pygame.py' (classe).
 The file 'labyrinth.txt' represents the structure of the game using lines of characters.
-The 'images' directory
+The 'images' directory contains the pictures useful to the game.
 
 The maze is seen as a game board with 15 lines (numbered from 0 to 14) and 15 columns (numbered from 0 to 14).
 
@@ -14,6 +16,7 @@ These characters symbolize either a 'path' box through which MacGyver can move i
 
 We instantiate a labyrinth from the class 'Labyrinth'.
 We instantiate the MacGyver character (instance 'mac_gyver') from the class 'Hero'.
+We instantiate all Pygame elements (instance 'my_pygame') from the class 'MyPygame'.
 We randomly position 3 objects on the path that MacGyver can traverse.
 
 A position is determined along the x and y axes (abscissa and ordinate).
@@ -30,9 +33,11 @@ FR
 OpenClassrooms parcours DA Python - projet 3
 -----
 
-Le fichier 'jeu.py' correspond au programme dont les modules sont 'contantes.py', 'Labyrinth.py' (classe), 'Hero.py' (classe).
+Nécessite Python 3, Pygame 1.9.3
+
+Le fichier 'game.py' correspond au programme dont les modules sont 'contants.py', 'labyrinth.py' (classe), 'hero.py' (classe) and my_pygame.py (classe).
 Le fichier 'labyrinth.txt' représente la structure du jeu à l'aide de lignes de caractères.
-Le répertoire 'images'
+Le répertoire 'images' stocke les images utiles au jeu.
 
 Le labyrinthe est vu comme un plateau de jeu de 15 lignes (numérotées de 0 à 14) et 15 colonnes (numérotées de 0 à 14).
 
@@ -41,6 +46,7 @@ Ces caractères symbolisent soit une case 'chemin' via laquelle MacGyver peut se
 
 On instancie un labyrinthe à partir de la classe 'Labyrinth'.
 On instancie le personnage MacGyver (instance 'mac_gyver') à partir de la classe 'Hero'.
+On instancie les éléments Pygame (instance 'my_pygame') à partie de la classe 'MyPygame'.
 On positionne 3 objets de manière aléatoire sur le chemin que MacGyver peut parcourir.
 
 Une position se détermine selon les axes x et y (abscisse et ordonnée).
