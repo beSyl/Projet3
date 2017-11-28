@@ -25,17 +25,17 @@ def main():
         labyrinth = Labyrinth()
         # Create character
         mac_gyver = Hero(labyrinth)
-        # Manage displaying and keyboard with Pygame
-        my_pygame.display_elements(labyrinth, mac_gyver)
 
         # GAME LOOP
         while my_pygame.game:
+            # Manage displaying, updating after a movement and keyboard commands with Pygame
             my_pygame.refresh(labyrinth, mac_gyver)
             mac_gyver.pick_up(labyrinth)
             if labyrinth.structure[mac_gyver.square_y][mac_gyver.square_x] == 'e':
                 mac_gyver.check_victory()
                 my_pygame.show_destiny(mac_gyver)
                 my_pygame.game = False
+
         my_pygame.play = False
 
 
