@@ -9,13 +9,12 @@ from my_pygame import *
 
 def main():
     """Main function that load and display all the objects of the Pygame window.
-    'Play' is True when the player wants to.
-    Then, it loads the labyrinth structure and the hero in a main game loop,
-    so 'game' is True to symbolize the beginning of the game.
-    Finally, as long as 'game' is True, the hero's actions (move, pick-up an object, ...) are managed
-    in the second loop that ends when the hero comes to the end.
+    It makes instances for the Pygame elements, the labyrinth, the hero.
+    So 'my_pygame.game' is True to symbolize the beginning of the game.
+    Finally, as long as 'my_pygame.game' is True, the hero's actions (move, pick-up an object, ...) are managed
+    in the game loop that ends when the hero comes to the last square.
     Depending on the number of items picked up by the hero, either he wins or loses.
-    There, 'game' becomes False and 'play' depends of the player's choice.
+    There, 'my_pygame.game' becomes False to end the game.
     """
     # Instance of Pygame elements
     my_pygame = MyPygame()
