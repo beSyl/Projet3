@@ -17,26 +17,22 @@ def main():
     Depending on the number of items picked up by the hero, either he wins or loses.
     There, 'game' becomes False and 'play' depends of the player's choice.
     """
+    # Instance of Pygame elements
     my_pygame = MyPygame()
+    # Make a labyrinth from a file
+    labyrinth = Labyrinth()
+    # Create character
+    mac_gyver = Hero(labyrinth)
 
-    # MAIN LOOP
-    while my_pygame.play:
-        # Make a labyrinth from a file
-        labyrinth = Labyrinth()
-        # Create character
-        mac_gyver = Hero(labyrinth)
-
-        # GAME LOOP
-        while my_pygame.game:
-            # Manage displaying, updating after a movement and keyboard commands with Pygame
-            my_pygame.refresh(labyrinth, mac_gyver)
-            mac_gyver.pick_up(labyrinth)
-            if labyrinth.structure[mac_gyver.square_y][mac_gyver.square_x] == 'e':
-                mac_gyver.check_victory()
-                my_pygame.show_destiny(mac_gyver)
-                my_pygame.game = False
-
-        my_pygame.play = False
+    # GAME LOOP
+    while my_pygame.game:
+        # Manage displaying, updating after a movement and keyboard commands with Pygame
+        my_pygame.refresh(labyrinth, mac_gyver)
+        mac_gyver.pick_up(labyrinth)
+        if labyrinth.structure[mac_gyver.square_y][mac_gyver.square_x] == 'e':
+            mac_gyver.check_victory()
+            my_pygame.show_destiny(mac_gyver)
+            my_pygame.game = False
 
 
 if __name__ == "__main__":

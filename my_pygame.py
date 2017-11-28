@@ -12,8 +12,6 @@ from constants import *
 class MyPygame:
     def __init__(self):
         pygame.init()
-        # Boolean useful to the main loop of the game.
-        self.play = True
         # Boolean useful to the second loop of the game.
         self.game = True  # useful for second loop
         # Open Pygame window(it's a square, so the width is equal to the height).
