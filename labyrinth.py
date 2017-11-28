@@ -25,11 +25,11 @@ class Labyrinth:
             for line in file:
                 list_line = []
                 # Go through characters in the file, meaning the squares
-                for sprite in line:
+                for letter in line:
                     # Ignore line breaks
-                    if sprite != '\n':
+                    if letter != '\n':
                         # Add each character to the line list
-                        list_line.append(sprite)
+                        list_line.append(letter)
                 self.structure.append(list_line)
 
     def place_objects(self):
